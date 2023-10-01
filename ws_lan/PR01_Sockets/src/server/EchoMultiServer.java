@@ -18,9 +18,18 @@ public class EchoMultiServer {
 
       boolean listening = true;
       while (listening) {
-    	//EJERCICIO: aceptar una nueva conexión 
+    	//EJERCICIO: aceptar una nueva conexiï¿½n 
     	//EJERCICIO: y crear un Thread para que la gestione 
-
+    	  Socket clientSocket = null;
+    	  
+    	  try {
+    		  clientSocket = serverSocket.accept();
+    	  } catch (IOException e) {
+    		  System.err.println("Accept failed on port: 4000, " + e.getMessage());
+    		  continue;
+    	  }
+    	  new EchoMultiServerThread(clientSocket).start();
+ 
      }
 
      try {
@@ -48,8 +57,8 @@ class EchoMultiServerThread extends Thread {
         clientSocket = socket;
         eo = new EchoObject();
         try {
-        	is = new BufferedReader(new InputStreamReader( //EJERCICIO ... )); 
-        	os = new PrintWriter( //EJERCICIO ... ); 
+        	is = new BufferedReader(new InputStreamReader( clientSocket.getInputStream()));
+        	os = new PrintWriter( clientSocket.getOutputStream(), true);
 
         } catch (IOException e) {
             System.err.println("Error sending/receiving" + e.getMessage());
@@ -68,7 +77,8 @@ class EchoMultiServerThread extends Thread {
             while ((inputline = is.readLine()) != null) {
             	//EJERCICIO: Invocar el objeto 
             	//EJERCICIO: y devolver la respuesta por el socket 
-
+            	os.println(eo.echo(inputline));
+            	os.flush();
             }
             os.close();
             is.close();
