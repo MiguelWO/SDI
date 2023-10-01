@@ -65,13 +65,10 @@ class Rectangulo {
 //EJERCICIO: con un nuevo atributo color y sobrecargando el m�todo toString 
 class RectanguloColor extends Rectangulo {
 	//EJERCICIO: ... 
-	private int color;
+	private String color;
 	
-	
-    
-
-    public RectanguloColor(Punto p, int lado, int lado2, int color) {
-		super(p,lado,lado2);
+    public RectanguloColor(Punto p, int ancho, int alto, String color) {
+		super(p,ancho,alto);
 		this.color = color;
 	}
 
@@ -84,7 +81,7 @@ class RectanguloColor extends Rectangulo {
 
 
 class CuadradoColor extends RectanguloColor {
-    public CuadradoColor(Punto p, int lado, int color){
+    public CuadradoColor(Punto p, int lado, String color){
        super(p,lado,lado,color);
    }
 }
@@ -100,6 +97,7 @@ public class Objetos{
 
   public static void main(String args[]) throws IOException{
 
+	System.out.println(args.length);
     if (args.length < 4){
       System.out.println("Uso: Objetos origen-x origen-y ancho alto");
       System.exit(1);
@@ -112,7 +110,7 @@ public class Objetos{
        i[j] = Integer.parseInt(args[j]);
     R3 = new Rectangulo(i[0],i[1],i[2],i[3]);
 
-    RC= 
+    RC= new RectanguloColor(new Punto(i[0],i[1]),R3.ancho(),R3.alto(),"Rojo");
     	//EJERCICIO: Cree una instancia de rect�ngulo color RC 
     	//EJERCICIO: que a�ada a R3 el atributo de color. 
 
@@ -125,13 +123,21 @@ public class Objetos{
   //EJERCICIO: Invoque el m�todo mover(10,10) sobre R3 
   //EJERCICIO: Invoque el m�todo toString sobre R3 y RC 
   //EJERCICIO: y visualicelos por pantalla el resultado 
+    
+    R3.mover(10, 10);
+    
+    R3.toString();
+    RC.toString();
 
   //PREGUNTA: Se ha "movido" R3? y RC? Deber�a haberse "movido" RC? 
   // Explique convenientemente este aspecto. 
+//    RC no se debio haber movido ya que son dos objetos diferentes
 
 
   C= //EJERCICIO: Cree un CuadradoColor con origen en 
 //   	el punto: (2,2),alto=5,color=25 
+		  
+	C = new CuadradoColor(new Punto(2,2), 5, "Amarillo");
 
 
     System.out.println("C: " + C.toString());
