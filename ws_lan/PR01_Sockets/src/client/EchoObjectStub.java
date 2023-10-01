@@ -34,10 +34,34 @@ public class EchoObjectStub implements EchoInt {
   }
 
   private synchronized void connect() throws java.rmi.RemoteException {
-	//EJERCICIO: Implemente el método connect 
+	//EJERCICIO: Implemente el mï¿½todo connect 
+	  if (!connected) {
+		  try {
+			  echoSocket = new Socket(host,port);
+			  
+			  os = new PrintWriter(echoSocket.getOutputStream(), true);
+			  is = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+			  
+			  connected = true;
+		  } catch (IOException e) {
+			  System.err.println("Error al conectar al servidor: " + e.getMessage());
+		  }
+	  }
+	  
   }
 
   private synchronized void disconnect(){ 
-	//EJERCICIO: Implemente el método disconnect 
+	//EJERCICIO: Implemente el mï¿½todo disconnect 
+	  if(connected) {
+		  try {
+			  if (os != null) os.close();
+			  if (is != null) is.close();
+			  if (echoSocket != null) echoSocket.close();
+			  
+			  connected = false;
+		  } catch (IOException e) {
+			  System.err.println("Error al desconectar del servidor: " + e.getMessage());
+		  }
+	  }
   }
 }
