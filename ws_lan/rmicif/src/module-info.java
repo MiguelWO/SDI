@@ -4,5 +4,5 @@
 /**
  * 
  */
-module SE00_Java {
+module rmicif {
 }

@@ -2,7 +2,7 @@
 <section name="Workbench">
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="1"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-17"/>
-	<item key="org.eclipse.jdt.ui.last.selected.project.jre" value="openjdk11"/>
+	<item key="org.eclipse.jdt.ui.last.selected.project.jre" value="openjdk17"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="group_libraries" value="true"/>
 		<item key="layout" value="2"/>
@@ -51,5 +51,12 @@
 		<item key="DIALOG_WIDTH" value="584"/>
 		<item key="DIALOG_HEIGHT" value="728"/>
 		<item key="DIALOG_FONT_NAME" value="1|Noto Sans|10.0|0|GTK|1|"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item key="pageIndex" value="1"/>
+	</section>
+	<section name="RefactoringWizard.preview">
+		<item key="width" value="600"/>
+		<item key="height" value="400"/>
 	</section>
 </section>

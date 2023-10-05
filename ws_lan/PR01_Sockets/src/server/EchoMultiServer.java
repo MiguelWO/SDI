@@ -26,10 +26,10 @@ public class EchoMultiServer {
     		  clientSocket = serverSocket.accept();
     	  } catch (IOException e) {
     		  System.err.println("Accept failed on port: 4000, " + e.getMessage());
-    		  continue;
+//    		  continue;
+    		  e.printStackTrace();
     	  }
     	  new EchoMultiServerThread(clientSocket).start();
- 
      }
 
      try {
@@ -58,7 +58,7 @@ class EchoMultiServerThread extends Thread {
         eo = new EchoObject();
         try {
         	is = new BufferedReader(new InputStreamReader( clientSocket.getInputStream()));
-        	os = new PrintWriter( clientSocket.getOutputStream(), true);
+        	os = new PrintWriter( clientSocket.getOutputStream());
 
         } catch (IOException e) {
             System.err.println("Error sending/receiving" + e.getMessage());

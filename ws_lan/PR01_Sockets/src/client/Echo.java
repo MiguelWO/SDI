@@ -5,15 +5,17 @@ import java.net.*;
 import java.io.FileWriter;
 
 public class Echo {
-  private static EchoObjectStub ss;
+//  private static EchoObjectStub ss;
+	private static EchoObjectStub2 ss;
 
   public static void main(String[] args) {
 
     if (args.length<2) {
-        System.out.println("Usage: Echo <host> <port#>");
+        System.out.println("Usage: <host> <port#>");
         System.exit(1);
     }
-    ss = new EchoObjectStub();
+//    ss = new EchoObjectStub();
+    ss = new EchoObjectStub2();
     ss.setHostAndPort(args[0],Integer.parseInt(args[1]));
     
 //    Socket echoSocket = null;
@@ -21,8 +23,7 @@ public class Echo {
 //    InputStream is = null;
 
     BufferedReader stdIn = new BufferedReader( new InputStreamReader(System.in));
-    
-    
+    PrintWriter stdOut = new PrintWriter(System.out);      
     String input,output;
     try {
     	//EJERCICIO: el bucle infinito: 
@@ -37,11 +38,11 @@ public class Echo {
     		
     		output = ss.echo(input);
     		
-//    		stdOut.println("Server Response:"+ output);
-//    		stdOut.flush();
+    		stdOut.println("Server Response:"+ output);
+    		stdOut.flush();
     		
-    		System.out.println("Server Response" + output);
-    		System.out.flush();
+//    		System.out.println("Server Response" + output);
+//    		System.out.flush();
     	}
     	
 //    	echoSocket = new Socket(args[0], Integer.parseInt(args[1]));

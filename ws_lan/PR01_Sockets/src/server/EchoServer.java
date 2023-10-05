@@ -19,7 +19,6 @@ class EchoServer {
            System.out.println("Unknown Host :" + e.toString());
            System.exit(1);
       }
-
       try {
            serverSocket = new ServerSocket(4000);
       } catch (IOException e) {
