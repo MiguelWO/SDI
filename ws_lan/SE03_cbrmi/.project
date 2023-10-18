@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>rmicif</name>
+	<name>SE03_cbrmi</name>
 	<comment></comment>
 	<projects>
+		<project>SE03_cbint</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
