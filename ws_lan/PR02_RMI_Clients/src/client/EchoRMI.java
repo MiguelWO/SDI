@@ -24,11 +24,18 @@ public class EchoRMI {
         String input,output;
         try{
         	//EJERCICIO: "lookup" the Echo RMI object
+        	String host = args[0];
+        	Registry reg = LocateRegistry.getRegistry(host);
+        	
+        	EchoInt echo = (EchoInt) reg.lookup("echo");
+        	
+        	
 
           stdOut.print("> "); stdOut.flush();
           while ( (input = stdIn.readLine())!=null){
         	  
         	  //EJERCICIO: call echo RMI object 
+        	  output = echo.echo(input);
         	  
               stdOut.println(output);
               stdOut.print("> "); stdOut.flush();

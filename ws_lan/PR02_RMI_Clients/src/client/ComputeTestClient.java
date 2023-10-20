@@ -38,12 +38,17 @@ public class ComputeTestClient implements Serializable {
         String input,output;
         try{
         	//EJERCICIO: "lookup" the Compute server RMI object
+        	ComputeServerInt server = (ComputeServerInt) Naming.lookup(server_name);
+        	
         	//EJERCICIO: load the task (computeClient.echoTask) to the computeServer
+        	int taskId = server.loadTask(computeClient.echoTask);
+        	
         	
           stdOut.print("> "); stdOut.flush();
           while ( (input = stdIn.readLine())!=null){
         	  
         	  //EJERCICIO: execute the loaded task. Get the response in "output"
+        	  output = (String) server.executeTask(taskId,input);
         	  
               stdOut.println(output);
               stdOut.print("> "); stdOut.flush();

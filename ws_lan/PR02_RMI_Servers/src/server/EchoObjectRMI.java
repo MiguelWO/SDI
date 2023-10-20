@@ -35,8 +35,16 @@ public class EchoObjectRMI implements EchoInt {
 		 
         try {
         	//EJERCICIO: get the local registry
+        	Registry registry = LocateRegistry.getRegistry();
+        	
         	//EJERCICIO: build the EchoObjectRMI stub
+        	EchoObjectRMI echoObject = new EchoObjectRMI();
+        	EchoInt stub =(EchoInt) UnicastRemoteObject.exportObject(echoObject,0);
+        	
         	//EJERCICIO: bind (or rebind) the stub into the local registry
+        	registry.rebind("echo", stub);
+        	
+        	
         } catch (RemoteException e) {
             System.err.println("Something wrong happended on the remote end");
             e.printStackTrace();

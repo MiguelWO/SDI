@@ -16,12 +16,14 @@ public class TaskEcho implements TaskInt,Serializable {
 	public Object execute() throws RemoteException {
 
 			//EJERCICIO
+		return "Sin Parametros";
 	}
 
 	@Override
 	public Object execute(Object params) throws RemoteException {
 			
 			//EJERCICIO
+		return "Info: "  + params.toString();
 	}		
 		
 }
