@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="generated"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/openjdk17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/ice-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/ice-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icestorm-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icestorm-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icessl-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icepatch2-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icepatch2-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icelocatordiscovery-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icelocatordiscovery-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icegrid-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icegrid-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icediscovery-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icediscovery-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icebt-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icebt-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icebox-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/icebox-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/glacier2-compat-3.7.9.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/glacier2-3.7.9.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
