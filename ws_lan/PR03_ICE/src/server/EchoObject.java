@@ -8,7 +8,7 @@ import com.zeroc.Ice.Current;
 
 import interfaces.echo.EchoInt;
 
-public class EchoObject implements EchoInt {
+public class EchoObject {
 	String myURL="localhost";
 	
 	public EchoObject(){

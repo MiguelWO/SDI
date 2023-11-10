@@ -3,4 +3,5 @@
     <fullyQualifiedTypeName name="java.net.InetAddress"/>
     <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="sdi.echoIce.EchoPrx"/>
 </qualifiedTypeNameHistroy>
