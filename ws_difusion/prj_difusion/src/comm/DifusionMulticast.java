@@ -33,7 +33,13 @@ public class DifusionMulticast implements Difusion{
 	  //EJERCICIO: 
 	  //Unirse al grupo 
 	///////////////////////////////////////////////////////////
-	
+	try {
+		socket = new MulticastSocket(port);
+		group = new InetSocketAddress(ip,port);
+		socket.joinGroup(group, null);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
   }
 
 //------------------------------------------------------------------------------
@@ -47,8 +53,28 @@ public class DifusionMulticast implements Difusion{
     ///////////////////////////////////////////////////////////
     //EJERCICIO: recibir el paquete y deserializarlo 
     ///////////////////////////////////////////////////////////
-
-    return object;
+    	try {
+			socket.receive(packet);
+			buffer = packet.getData();
+	    	bis = new ByteArrayInputStream(buffer);
+	    	ois = new ObjectInputStream(bis);
+			object = ois.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if ( bis!= null) bis.close();
+				if (ois != null) ois.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+    	
+    	return object;
   }
 
 //------------------------------------------------------------------------------
@@ -60,6 +86,28 @@ public class DifusionMulticast implements Difusion{
     ///////////////////////////////////////////////////////////
     //EJERCICIO: serializar el paquete y difundirlo   
     ///////////////////////////////////////////////////////////
+    
+    try {
+    	bos = new ByteArrayOutputStream();
+    	oos = new ObjectOutputStream(bos);
+    	
+    	oos.writeObject(object);
+    	oos.flush();
+    	buffer = bos.toByteArray();
+    	
+    	packet = new DatagramPacket(buffer, buffer.length, group.getAddress(), m_port);
+    	
+    	socket.send(packet);	
+    } catch (IOException e) {
+    	e.printStackTrace();
+    } finally {
+    	try {
+			if (bos!= null) bos.close();
+			if (oos != null)oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
     
   }
 }

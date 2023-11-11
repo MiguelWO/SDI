@@ -91,6 +91,7 @@ public class Prueba {
             st = instantanea.estadorobs[i];
             System.out.println("Contenido " + i + ": " + st.nombre);
         }
+        System.out.println("Finalizando");
         try{
           Thread.sleep(400);
         }catch(InterruptedException e){
