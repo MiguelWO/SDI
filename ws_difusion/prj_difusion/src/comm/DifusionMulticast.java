@@ -22,6 +22,7 @@ public class DifusionMulticast implements Difusion{
 
 //------------------------------------------------------------------------------
   public DifusionMulticast(String ip, int port) {
+	  System.out.println("DifusionMuticast Instanciada");
 	  
 	m_ip = ip;
 	m_port = port;

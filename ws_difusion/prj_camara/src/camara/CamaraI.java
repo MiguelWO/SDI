@@ -40,7 +40,7 @@ public class CamaraI implements agencia.objetos.Camara
 ///////////////////////////////////////////////////////////////////////////////////////////////
    
    public CamaraI(com.zeroc.Ice.Communicator ic, IPYPort iport) {
-	   
+	   System.out.println("CamaraI creada");
 	   iceComunicator = ic;
      ipyport = new IPYPort(iport.ip, iport.port);
      nrobots = 0; 
@@ -48,7 +48,7 @@ public class CamaraI implements agencia.objetos.Camara
    
    
    public void start(){
-
+	   System.out.println("Start CamaraI");
 	      new CamaraDifusion(ipyport);
    }
    
@@ -62,8 +62,10 @@ public class CamaraI implements agencia.objetos.Camara
 	  //EJERCICIO: Implementar la suscripcion del robot
 		//EJERCICIO: Retornar un objeto "suscripcion".
 		//////////////////////////////////////////////////////
+		listaRobots.add(IORrob);
+		nrobots +=1;
 
-        return null;
+        return new suscripcion(nrobots, ipyport);
 	}
 
 
@@ -80,6 +82,7 @@ public class CamaraI implements agencia.objetos.Camara
       private int periodMS = 500;
 
       public CamaraDifusion(IPYPort iport){
+    	  System.out.println("CamaraDifusion Instanciada");
          timer = new Timer();
          df= new Difusor(iport);
          timer.schedule(df,0,periodMS);
@@ -98,7 +101,7 @@ public class CamaraI implements agencia.objetos.Camara
 			}
           }
           public void run() {
-             //System.out.print("Voy a difundir...");
+             System.out.print("Voy a difundir... \n");
              EstadoRobot st = new EstadoRobot();
              LinkedList<String> listaFallos = new LinkedList<String>();
               //
@@ -114,14 +117,19 @@ public class CamaraI implements agencia.objetos.Camara
                     //EJERCICIO: invocar via ICE el metodo ObtenerEstado y anyadir
                     //el estado del robot correspondiente a la lista de estados          
                     ////////////////////////////////////////////////////////////////
-                  
+                    System.out.println(ior);
+                    
+                    RobotSeguidorPrx robot = RobotSeguidorPrx.checkedCast(iceComunicator.stringToProxy(ior));
+                    if (robot == null ) throw new Error("Proxy Invalido");
+                    
+                    listaEstados.add(robot.ObtenerEstado());
 
                } catch (Exception e){
                   System.out.println("Detectado fallo x en Robot: " + ior );
                   ////////////////////////////////////////////////////////////////
                   //EJERCICIO: anyadir el robot caido a la lista de fallos 
                   ////////////////////////////////////////////////////////////////
-
+                  listaFallos.add(ior);
                }
              }
              //
@@ -133,6 +141,10 @@ public class CamaraI implements agencia.objetos.Camara
              //instantanea = new Instantanea(/*EJERCICIO*/);
              //EJERCICIO: difundir la instantanea 
              ////////////////////////////////////////////////////////////////////////
+             
+             instantanea = new Instantanea((EstadoRobot[])listaEstados.toArray(new EstadoRobot[0]));
+             
+             difusion.sendObject(instantanea);
              
              //////
         } // de run

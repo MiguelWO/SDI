@@ -20,7 +20,6 @@ public class CamaraIceServer {
 		//
 	    if (args.length >= 2)
 		    ipyport = new IPYPort( args[0], Integer.parseInt(args[1]) );
-		else
 		    ipyport = new IPYPort( "228.7.7.7", 7010);
 	    //
 		System.out.println("Difusion por " + ipyport.ip + "_" + ipyport.port);
