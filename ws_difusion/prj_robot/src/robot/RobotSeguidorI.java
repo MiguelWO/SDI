@@ -44,7 +44,7 @@ public class RobotSeguidorI implements agencia.objetos.RobotSeguidor
     	//EJERCICIO: componer un objeto EstadoRobot y retornarlo
     	///////////////////////////////////////////////////////////
 
-      return null;
+      return new EstadoRobot(minombre,miid,miIOR);
     }
 
 	// Arranca la actividad del robot.
@@ -68,9 +68,18 @@ public class RobotSeguidorI implements agencia.objetos.RobotSeguidor
       //           Almacenar la suscrioción en "sus". 
       //           Almacenar el Id otorgado.
       //EJERCICIO: crear conector de difusion (DifusionMulticast)
-      //////////////////////////////////////////////////////////////	
+      //////////////////////////////////////////////////////////////
+    	try {
+	    	sus = camaraProxy.SuscribirRobot(miIOR);
+	    	miid = sus.id;
+	    	difusion = new DifusionMulticast(sus.iport.ip,sus.iport.port);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	
+    	System.out.println("RobotDifusion run");
  
-      
       //////////////////////////////////////////////////////////////
       //Bucle: recibir, ...
       while(true){
@@ -80,6 +89,11 @@ public class RobotSeguidorI implements agencia.objetos.RobotSeguidor
       //EJERCICIO: iterar sobre la lista de estados, imprimiendo el nombre de
       //           todos los robots cuyo estado figura en la instantanea.
       //////////////////////////////////////////////////////////////
+    	  Instantanea ins = (Instantanea) difusion.receiveObject();
+    	  EstadoRobot[] estados = ins.estadorobs;
+    	  for (int j = 0; j < estados.length; j++) {
+    		  System.out.println("Contenido: " + estados[j].nombre + " - " + estados[j].id);
+    	  }
       }
     } 
   } // de RobotDifusion

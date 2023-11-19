@@ -48,6 +48,11 @@ public class RobotSeguidorIceServer {
             		//EJERCICIO: Conectar con el servidor de nombres 
             		//           y obtener una referencia a la Camara (camProxy). 
             		///////////////////////////////////////////////////////////////////////////////
+            		com.zeroc.Ice.ObjectPrx base = ic.stringToProxy("Camara@CamaraAdapter");
+            		camProxy = CamaraPrx.checkedCast(base);
+            		cameraConnected = true;
+            		
+            		System.out.println("Conectado a la camara");
 
             	} catch (com.zeroc.Ice.NotRegisteredException ncEx) {
             		System.out.println("Objeto distribuido ICE \"Camara\" no disponible, nuevo intento de conexion en 2 segundos.");
@@ -72,6 +77,8 @@ public class RobotSeguidorIceServer {
         	//EJERCICIO: convertir la referencia al robot en un IOR en formato String
             //           y almacenarlo en la variable robotIOR
             ///////////////////////////////////////////////////////////////////////////////
+            com.zeroc.Ice.ObjectPrx proxy = adapter.createDirectProxy(com.zeroc.Ice.Util.stringToIdentity("RobotSeguidor"));
+            robotIOR = ic.proxyToString(proxy);
             
             System.out.println("IOR (robot): " + robotIOR);
             ///////////////////////////////////////////////////////////////////////////////
