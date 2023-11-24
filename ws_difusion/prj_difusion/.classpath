@@ -7,5 +7,9 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/prj_agencia_ice"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/activemq/log4j-api-2.17.2.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/activemq/log4j-core-2.17.2.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Server/activemq/slf4j-api-1.7.36.jar"/>
+	<classpathentry kind="lib" path="/home/sdi/SDI/Tools/apache-activemq-5.17.1/activemq-all-5.17.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
