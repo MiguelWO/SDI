@@ -11,6 +11,7 @@ import java.util.Properties;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.ObjectMessage;
+import javax.jms.Session;
 import javax.jms.Topic;
 import javax.jms.TopicConnection;
 import javax.jms.TopicConnectionFactory;
@@ -65,22 +66,22 @@ public class DifusionJMS implements javax.jms.MessageListener, Difusion {
             /*********************************************************/
             /**** EJERCICIO 01: Preparar la infraestructura JMS ******/
             // EJ01.a: obtener la factoria a partir del contexto.
-            factory = /***/
+            factory = (TopicConnectionFactory)context.lookup(factoryName);
             // EJ01.b: obtener el "Topic" destino a partir de su nombre.
-            dest = /***/
+            dest = (Topic) context.lookup(destName);
             // EJ01.c: crear una conexion usando la factoria
-            connection = /***/
+            connection = factory.createTopicConnection();
             // Establece un identificador de cliente �nico para la conexion.
             connection.setClientID(username+Math.random()); 
             // EJ01.d: crear las sesiones de publicacion y de suscripcion.
-            sessionSuscriber = /***/
-            sessionPublisher = /***/
+            sessionSuscriber = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+            sessionPublisher = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
             // EJ01.e: crear el suscriptor a partir de la sesion de suscripcion. 
-            subscriber = /***/
+            subscriber = sessionSuscriber.createSubscriber(dest);
             // Define este objeto (this) como "listener" del suscriptor.
             subscriber.setMessageListener(this);     
             // EJ01.f: crear el publicador a partir de la sesion de publicacion.
-            publisher = /***/
+            publisher = sessionPublisher.createPublisher(dest);
             // Arranca la conexion para poder recibir mensajes.
             connection.start();
             /*********************************************************/
@@ -100,9 +101,15 @@ public class DifusionJMS implements javax.jms.MessageListener, Difusion {
 		// Cast del mensaje
 		ObjectMessage objMsg = (ObjectMessage) msg;
 		// EJ02.a: extraer el objeto del mensaje y almacenarlo en "currentItem"
-		currentItem = /***/
-		// EJ02.b: despertar a todos los hilos suspendidos a la espera 
-		// de la llegada de un mensaje.
+		try {
+			currentItem = objMsg.getObject();
+			// EJ02.b: despertar a todos los hilos suspendidos a la espera 
+			// de la llegada de un mensaje.
+			notifyAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -113,6 +120,13 @@ public class DifusionJMS implements javax.jms.MessageListener, Difusion {
 		Object obj = null;
 		// EJ03.a mientras "currentItem" sea "null" suspender el hilo.
 		// 
+		while (currentItem == null) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// Ya tenemos un mensaje, lo copiamos para retornarlo y ponemos "currentItem" 
 		// a "null" para indicar que el mensaje ya ha sido consumido.
